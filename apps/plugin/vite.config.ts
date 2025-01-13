@@ -16,4 +16,8 @@ export default defineConfig({
       output: {},
     },
   },
+  define: {
+    SUPABASE_URL: JSON.stringify('https://vwqhreycgyfxhtwyohdm.supabase.co'),
+    SUPABASE_ANON_KEY: JSON.stringify('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3cWhyZXljZ3lmeGh0d3lvaGRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY3ODI4NzIsImV4cCI6MjA1MjM1ODg3Mn0.FcVl0C5e-vDyGW3dmrAcPOmiqZT3OhTa9spyNvv6WZY'),
+  }
 });
