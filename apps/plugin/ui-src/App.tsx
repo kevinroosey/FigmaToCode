@@ -147,8 +147,9 @@ export default function App() {
       console.error("Error inserting code", error);
 
     }
-
   }
+
+
 
   return (
     <div className={`${figmaColorBgValue === "#ffffff" ? "" : "dark"}`}>

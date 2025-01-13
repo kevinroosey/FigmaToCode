@@ -28,7 +28,7 @@ type PluginUIProps = {
   onPreferenceChanged: (key: string, value: boolean | string) => void;
   colors: SolidColorConversion[];
   gradients: LinearGradientConversion[];
-  handleOpenWithPolymet: (code: string) => Promise<void>
+  handleOpenWithPolymet: (code: string) => Promise<void>;
 };
 
 const frameworks: Framework[] = ["HTML", "Tailwind"];
@@ -38,6 +38,8 @@ export const PluginUI = (props: PluginUIProps) => {
   const isEmpty = props.code === "";
 
   const warnings = props.warnings ?? [];
+
+
 
   return (
     <div className="flex flex-col h-full dark:text-white bg-white dark:bg-gray-950">
