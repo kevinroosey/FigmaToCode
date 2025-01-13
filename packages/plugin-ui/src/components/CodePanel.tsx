@@ -39,6 +39,36 @@ const CodePanel = (props: CodePanelProps) => {
 
   };
 
+  // handle opening this code in Polymet
+  const openWithPolymet = async () => {
+      if (isEmpty) {
+        console.error("Code snippet is empty.");
+        return;
+      }
+
+      
+/* putting this in here for future use, still need to set up supabase
+    try {
+      const { data, error } = await supabase
+        .from('code_snippets')
+        .insert([{ code }])
+        .select('id')
+        .single();
+
+      if (error) {
+        console.error('Error saving to Supabase:', error);
+        return;
+      }
+
+      const id = data.id;
+      window.open(`http://localhost:3001/${id}`, '_blank');
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
+      */
+};
+
+
   const handleButtonHover = () => setSyntaxHovered(true);
   const handleButtonLeave = () => setSyntaxHovered(false);
 
