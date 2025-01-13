@@ -1,8 +1,17 @@
 {
   "extends": "tsconfig/base.json",
   "compilerOptions": {
-    "target": "ES2021",
-    "jsx": "react-jsx",
-    "typeRoots": ["node_modules/@types", "node_modules/@figma"]
+    "target": "ES2021", // Modern JavaScript target
+    "module": "esnext", // Enable support for import.meta
+    "jsx": "react-jsx", // Enable React JSX syntax
+    "typeRoots": [
+      "node_modules/@types",
+      "node_modules/@figma" // Include Figma-specific types
+    ],
+    "moduleResolution": "node", // Resolve modules like Node.js
+    "strict": true, // Enable strict type checking
+    "esModuleInterop": true, // Interop between CommonJS and ES modules
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true // Enforce case sensitivity in imports
   }
 }

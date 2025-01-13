@@ -13,6 +13,7 @@ import {
   Warning,
 } from "types";
 import { postUISettingsChangingMessage } from "./messaging";
+import { createClient } from "@supabase/supabase-js";
 
 interface AppState {
   code: string;
@@ -26,6 +27,12 @@ interface AppState {
 }
 
 const emptyPreview = { size: { width: 0, height: 0 }, content: "" };
+
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 export default function App() {
   const [state, setState] = useState<AppState>({
     code: "",
@@ -131,6 +138,18 @@ export default function App() {
   };
   console.log("state.code", state.code.slice(0, 25));
 
+  const handleOpenWithPolymet = async (code: string) => {
+    const { data, error } = await supabase
+      .from("code_gen")
+      .insert([{ code }])
+      .single();
+    if (error) {
+      console.error("Error inserting code", error);
+
+    }
+
+  }
+
   return (
     <div className={`${figmaColorBgValue === "#ffffff" ? "" : "dark"}`}>
       <PluginUI
@@ -145,6 +164,7 @@ export default function App() {
         }
         colors={state.colors}
         gradients={state.gradients}
+        handleOpenWithPolymet={handleOpenWithPolymet}
       />
     </div>
   );

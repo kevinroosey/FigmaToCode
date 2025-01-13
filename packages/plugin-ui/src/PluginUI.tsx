@@ -28,6 +28,7 @@ type PluginUIProps = {
   onPreferenceChanged: (key: string, value: boolean | string) => void;
   colors: SolidColorConversion[];
   gradients: LinearGradientConversion[];
+  handleOpenWithPolymet: (code: string) => Promise<void>
 };
 
 const frameworks: Framework[] = ["HTML", "Tailwind"];
@@ -96,6 +97,7 @@ export const PluginUI = (props: PluginUIProps) => {
             selectPreferenceOptions={selectPreferenceOptions}
             settings={props.settings}
             onPreferenceChanged={props.onPreferenceChanged}
+            handleOpenWithPolymet={props.handleOpenWithPolymet}
           />
 
           {props.colors.length > 0 && (
