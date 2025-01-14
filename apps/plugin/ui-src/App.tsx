@@ -28,10 +28,12 @@ interface AppState {
 
 const emptyPreview = { size: { width: 0, height: 0 }, content: "" };
 
-console.log('URL:', SUPABASE_URL);
-console.log('KEY:', SUPABASE_ANON_KEY);
+const SUPABASE_URL = 'https://vwqhreycgyfxhtwyohdm.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ3cWhyZXljZ3lmeGh0d3lvaGRtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzY3ODI4NzIsImV4cCI6MjA1MjM1ODg3Mn0.FcVl0C5e-vDyGW3dmrAcPOmiqZT3OhTa9spyNvv6WZY';
+
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
 
 export default function App() {
   const [state, setState] = useState<AppState>({
@@ -139,15 +141,34 @@ export default function App() {
   console.log("state.code", state.code.slice(0, 25));
 
   const handleOpenWithPolymet = async (code: string) => {
-    const { data, error } = await supabase
-      .from("code_gen")
-      .insert([{ code }])
-      .single();
-    if (error) {
-      console.error("Error inserting code", error);
+    try {
+      // Insert code into the `code_gen` table and retrieve the inserted row's ID
+      const { data, error } = await supabase
+        .from("code_gen")
+        .insert([{ code }])
+        .select("id") // Select the `id` field of the inserted row
+        .single();
 
+      if (error) {
+        console.error("Error inserting code:", error);
+        return;
+      }
+
+      if (data && data.id) {
+        // Redirect to the Next.js app at `localhost:3003/editor/{id}`
+        const id = data.id;
+        const url = `http://localhost:3003/editor/${id}`;
+
+        console.log("Redirecting to:", url);
+
+        // Open the URL in the user's default browser
+        window.open(url, "_blank");
+      }
+    } catch (err) {
+      console.error("Unexpected error:", err);
     }
-  }
+  };
+
 
 
 
