@@ -5,16 +5,21 @@ interface EditorPageProps {
     params: { id: string };
 }
 
-export default async function Editor({ params }: EditorPageProps) {
-    const { id } = await params;
+export default async function Editor({
+    params
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    // Remove `await` from the destructuring
+    const id = (await params).id;
 
     const codeQuery = await getCodeById(id);
     const code = await modifyCodeWithAnthropic(codeQuery?.code!);
 
-
     return (
-        <div className="w-full h-screen flex bg-neutral-900 ">
+        <div className="w-full h-screen flex bg-neutral-900">
             <EditorShell initialCode={code!} />
         </div>
     );
 }
+
