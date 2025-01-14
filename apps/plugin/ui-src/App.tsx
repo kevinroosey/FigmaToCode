@@ -157,7 +157,7 @@ export default function App() {
       if (data && data.id) {
         // Redirect to the Next.js app at `localhost:3003/editor/{id}`
         const id = data.id;
-        const url = `http://localhost:3003/editor/${id}`;
+        const url = `https://figma-to-code-inky.vercel.app/editor/${id}`;
 
         console.log("Redirecting to:", url);
 
