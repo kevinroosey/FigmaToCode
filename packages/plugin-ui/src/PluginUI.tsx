@@ -28,6 +28,7 @@ type PluginUIProps = {
   onPreferenceChanged: (key: string, value: boolean | string) => void;
   colors: SolidColorConversion[];
   gradients: LinearGradientConversion[];
+  handleOpenWithPolymet: (code: string) => Promise<void>;
 };
 
 const frameworks: Framework[] = ["HTML", "Tailwind"];
@@ -38,6 +39,8 @@ export const PluginUI = (props: PluginUIProps) => {
 
   const warnings = props.warnings ?? [];
 
+
+
   return (
     <div className="flex flex-col h-full dark:text-white bg-white dark:bg-gray-950">
       <div className="p-2 grid grid-cols-4 sm:grid-cols-2 md:grid-cols-4 gap-1">
@@ -46,7 +49,7 @@ export const PluginUI = (props: PluginUIProps) => {
             key={`tab ${tab}`}
             className={`w-full p-1 text-sm ${props.selectedFramework === tab
               ? "bg-blue-500 dark:bg-blue-500 text-white rounded-md font-semibold shadow-sm"
-              : "bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 border focus:border-0 border-neutral-300 dark:border-neutral-600 rounded-md hover:bg-green-600 dark:hover:bg-green-800 dark:hover:border-green-800 hover:text-white dark:hover:text-white font-semibold shadow-sm"
+              : "bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-200 border focus:border-0 border-neutral-300 dark:border-neutral-600 rounded-md hover:bg-blue-600 dark:hover:bg-blue-800 dark:hover:border-blue-800 hover:text-white dark:hover:text-white font-semibold shadow-sm"
               }`}
             onClick={() => {
               props.setSelectedFramework(tab as Framework);
@@ -96,6 +99,7 @@ export const PluginUI = (props: PluginUIProps) => {
             selectPreferenceOptions={selectPreferenceOptions}
             settings={props.settings}
             onPreferenceChanged={props.onPreferenceChanged}
+            handleOpenWithPolymet={props.handleOpenWithPolymet}
           />
 
           {props.colors.length > 0 && (

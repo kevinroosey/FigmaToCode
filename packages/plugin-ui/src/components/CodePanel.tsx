@@ -16,8 +16,12 @@ interface CodePanelProps {
   settings: PluginSettings | null;
   preferenceOptions: LocalCodegenPreferenceOptions[];
   selectPreferenceOptions: SelectPreferenceOptions[];
+  handleOpenWithPolymet: (code: string) => Promise<void>;
   onPreferenceChanged: (key: string, value: boolean | string) => void;
 }
+
+
+
 
 const CodePanel = (props: CodePanelProps) => {
   const [isPressed, setIsPressed] = useState(false);
@@ -33,10 +37,14 @@ const CodePanel = (props: CodePanelProps) => {
   const isEmpty = code === "";
 
   // Add your clipboard function here or any other actions
-  const handleButtonClick = () => {
-    setIsPressed(true);
-    setTimeout(() => setIsPressed(false), 250);
-
+  const handleButtonClick = async () => {
+    if (props.handleOpenWithPolymet) {
+      setIsPressed(true);
+      setTimeout(() => setIsPressed(false), 250);
+      await props.handleOpenWithPolymet(code); // Call the function here
+    } else {
+      console.error("handleOpenWithPolymet is not defined");
+    }
   };
 
   const handleButtonHover = () => setSyntaxHovered(true);

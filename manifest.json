@@ -1,21 +1,49 @@
 {
-  "name": "Figma to Code [HTML, Tailwind, Flutter, SwiftUI]",
+  "name": "Figma to Polymet [React(JSX), Tailwind]",
   "id": "842128343887142055",
   "api": "1.0.0",
   "main": "apps/plugin/dist/code.js",
   "ui": "apps/plugin/dist/index.html",
-  "editorType": ["figma", "dev"],
-  "capabilities": ["inspect", "codegen", "vscode"],
+  "editorType": [
+    "figma",
+    "dev"
+  ],
+  "capabilities": [
+    "inspect",
+    "codegen",
+    "vscode"
+  ],
   "permissions": [],
   "networkAccess": {
-    "allowedDomains": ["none"]
+    "allowedDomains": [
+      "https://vwqhreycgyfxhtwyohdm.supabase.co",
+      "https://*.supabase.co"
+    ]
   },
   "codegenLanguages": [
-    { "label": "HTML", "value": "html" },
-    { "label": "React (JSX)", "value": "html_jsx" },
-    { "label": "Tailwind", "value": "tailwind" },
-    { "label": "Tailwind (JSX)", "value": "tailwind_jsx" },
-    { "label": "Flutter", "value": "flutter" },
-    { "label": "SwiftUI", "value": "swiftUI" }
+    {
+      "label": "HTML",
+      "value": "html"
+    },
+    {
+      "label": "React (JSX)",
+      "value": "html_jsx"
+    },
+    {
+      "label": "Tailwind",
+      "value": "tailwind"
+    },
+    {
+      "label": "Tailwind (JSX)",
+      "value": "tailwind_jsx"
+    },
+    {
+      "label": "Flutter",
+      "value": "flutter"
+    },
+    {
+      "label": "SwiftUI",
+      "value": "swiftUI"
+    }
   ]
 }

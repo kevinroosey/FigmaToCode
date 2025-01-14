@@ -23,10 +23,11 @@ export default function Web() {
               setSelectedFramework={setSelectedFramework}
               htmlPreview={null}
               settings={undefined}
-              onPreferenceChanged={() => {}}
+              onPreferenceChanged={() => { }}
               colors={[]}
               gradients={[]}
               warnings={testWarnings}
+              handleOpenWithPolymet={async () => { }}
             />
           </div>
         </div>
@@ -40,10 +41,11 @@ export default function Web() {
               setSelectedFramework={setSelectedFramework}
               htmlPreview={null}
               settings={undefined}
-              onPreferenceChanged={() => {}}
+              onPreferenceChanged={() => { }}
               colors={[]}
               gradients={[]}
               warnings={testWarnings}
+              handleOpenWithPolymet={async () => { }}
             />
           </div>
         </div>
