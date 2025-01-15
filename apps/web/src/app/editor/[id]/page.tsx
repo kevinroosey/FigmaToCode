@@ -1,25 +1,34 @@
 import getCodeById, { modifyCodeWithAnthropic } from "./actions";
 import EditorShell from "@/components/editor-shell";
 
-interface EditorPageProps {
-    params: { id: string };
-}
-
 export default async function Editor({
-    params
+    params,
 }: {
     params: Promise<{ id: string }>;
 }) {
-    // Remove `await` from the destructuring
-    const id = (await params).id;
+    // Await the promise and destructure params safely
+    const { id } = await params;
 
+    // Get the code safely
     const codeQuery = await getCodeById(id);
-    const code = await modifyCodeWithAnthropic(codeQuery?.code!);
+    const originalCode = codeQuery?.code;
+
+    // Check if the originalCode exists before modifying it
+    if (!originalCode) {
+        throw new Error("Code not found for the given ID.");
+    }
+
+    const modifiedCode = await modifyCodeWithAnthropic(originalCode);
+
+    if (!modifiedCode) {
+        throw new Error("Error modifying the code with Anthropic.");
+    }
 
     return (
         <div className="w-full h-screen flex bg-neutral-900">
-            <EditorShell initialCode={code!} />
+            <EditorShell initialCode={modifiedCode} />
         </div>
     );
 }
+
 
