@@ -56,6 +56,11 @@ export default function Chat() {
         } 
     }
 
+    const revertCode = async (code:string) => {
+        setCode(code);
+        setChatHistory([...chatHistory, { user: 'user', message: 'Revert code to previous state', codeBeforeChange: code }]);
+    };
+
     return (
         <div className="h-screen flex flex-col justify-end p-16">
             <div className="flex flex-col gap-4 pb-6">
@@ -67,11 +72,11 @@ export default function Chat() {
                                 <TooltipProvider>
 
                                     <Tooltip>
-                                        <TooltipTrigger>
+                                        <TooltipTrigger onClick={() => revertCode(chat.codeBeforeChange!)}>
                                             <IconArrowBackUp className={`h-5 w-5 text-neutral-300`} /> 
                                         </TooltipTrigger>
                                         <TooltipContent className="bg-neutral-700 ml-2" side="right">
-                                        <p>Revert code to previous state</p>
+                                            <p>Revert code to previous state</p>
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
@@ -91,13 +96,13 @@ export default function Chat() {
                 ></textarea>
                 <div className="w-full flex justify-end items-end">
                     <button
-                        className="rounded-full h-8 w-8 bg-neutral-100 hover:bg-neutral-300 flex disabled:bg-neutral-500"
+                        className="rounded-full h-8 w-8 bg-neutral-100 hover:bg-neutral-300 flex items-center justify-center disabled:bg-neutral-500"
                         onClick={sendMessage}
                         disabled={!message || isClaudeTyping}
                     >
                         {isClaudeTyping ? (
                             <svg
-                                className="animate-spin h-5 w-5 text-neutral-950"
+                                className="animate-spin h-5 w-5 text-neutral-100"
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
                                 viewBox="0 0 24 24"
